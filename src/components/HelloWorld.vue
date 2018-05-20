@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
-      <li>
+      <li class="icon-add_circle">
         <a
           href="https://vuejs.org"
           target="_blank"
@@ -84,18 +84,31 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created(){
+    axios.get('/good/seller').then(
+      res => {
+        if(res.data.code === 0) {
+          console.log(res.data.data);
+        }
+      }
+    )
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import '../../static/style.css';
+
 h1, h2 {
   font-weight: normal;
 }

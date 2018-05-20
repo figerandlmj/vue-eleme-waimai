@@ -75,7 +75,20 @@ flex弹性布局
 6.出项目排期
 7.进入开发
 8.搭建项目框架
-9.模拟mock数据
+9.模拟mock数据  
+	http://mockjs.com/
+	cnpm install mockjs --save-dev
+	
+	cnpm install axios --save  
+
+	图标字体 https://icomoon.io/
+	
+	处理css
+	cnpm install stylus --save-dev
+	cnpm install stylus-loader --save-dev
+	cnpm install style-loader --save-dev
+	cnpm install css-loader --save-dev
+	cnpm install postcss-loader --save-dev
 10.实现页面
 11.自测
 12.联调
