@@ -6,24 +6,24 @@
       </div>
       <div class="content">
         <div class="title">
-          <span class="brand bg-image"></span>
+          <span class="brand"></span>
           <span class="name">{{seller.name}}</span>
         </div>
         <div class="description">
           {{seller.description}}/{{seller.deliveryTime}}分送达
         </div>
         <div v-if="seller.supports" class="supports">
-          <span class="icon bg-image" :class="classMap[seller.supports[0].type]"></span>
+          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
           <span>{{seller.supports[0].description}}</span>
         </div>
         <div class="num-wrapper" v-if="seller.supports">
-          <span class="num">{{seller.supports.length}}个</span>
+          <span>{{seller.supports.length}}个</span>
           <span class="icon-keyboard_arrow_right more"></span>
         </div>
       </div>
     </div>
     <div class="bulletin-wrapper">
-      <span class="bulletin-icon bg-image"></span>
+      <span class="bulletin-icon"></span>
       <span class="bulletin">{{seller.bulletin}}</span>
       <span class="icon-keyboard_arrow_right"></span>
     </div>
@@ -117,7 +117,6 @@ export default {
         font-size 10px
         border-radius 12px
         background-color rgba(0,0,0,0.2)
-        // .num
         .more
           width 2px
           vertical-align middle
@@ -126,7 +125,7 @@ export default {
     height 28px
     line-height 28px
     background-color rgba(7,17,27,0.2)
-    padding 0 12px
+    padding 0 16px 0 12px
     white-space nowrap
     text-overflow ellipsis
     overflow hidden
@@ -140,11 +139,10 @@ export default {
       bg-image("bulletin")
       background-size 22px 12px
     .bulletin
-      margin 0 4px
       vertical-align middle
     .icon-keyboard_arrow_right
       position absolute
-      right 12px
+      right 10px
       bottom 4px      
   .background
     position absolute
@@ -156,6 +154,4 @@ export default {
     img
       background-size cover
       width 100%      
-        
-  
 </style>

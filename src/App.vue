@@ -8,7 +8,7 @@
       <div class="tab-item"><router-link to="sellers">商家</router-link></div>
     </div>
     <div class="content">
-      <router-view></router-view>
+      <router-view :seller="seller"></router-view>
     </div>
   </div>
 </template>
@@ -52,12 +52,12 @@ export default {
     .tab-item
       flex 1
       text-align center
-      font-size 14px
-      color rgb(77,85,93)
       a
         width 100%
         height 100%
         display block
+        font-size 14px
+        color rgb(77,85,93)
       a.active
         color rgb(240,20,20) !important
 </style>

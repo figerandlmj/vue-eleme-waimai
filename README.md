@@ -89,6 +89,9 @@ flex弹性布局
 	cnpm install style-loader --save-dev
 	cnpm install css-loader --save-dev
 	cnpm install postcss-loader --save-dev
+
+	cnpm install better-scroll --save
+
 10.实现页面
 11.自测
 12.联调
