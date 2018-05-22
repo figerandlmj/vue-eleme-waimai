@@ -25,14 +25,15 @@
                   <span style="margin-left:12px;">好评率{{item2.rating}}%</span>
                 </div>
                 <div class="prices">
-                  <span class="price">{{item2.price}}</span>
-                  <span v-if="item2.oldPrice" class="old-price" style="margin-left:8px;">{{item2.oldPrice}}</span>
+                  <span class="price">￥{{item2.price}}</span>
+                  <span v-if="item2.oldPrice" class="old-price" style="margin-left:8px;">￥{{item2.oldPrice}}</span>
+                  <cartcontrol class="cart-control" :food="item2.food"></cartcontrol>
                 </div>
               </div>
             </li>
           </ul>
         </li>
-      </ul> 
+      </ul>
     </div>
     <!-- 购物车 -->
     <shopcar :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
@@ -44,6 +45,7 @@ import axios from 'axios'
 import Vue from 'vue'
 import BScroll from 'better-scroll'
 import shopcar from './shopcar'
+import cartcontrol from './cartcontrol'
 
 export default {
   name: 'goods',
@@ -64,7 +66,21 @@ export default {
   	axios.get('/good/goods').then(
       res => {
         if(res.data.code === 0) {
-          this.goods = res.data.data;
+          let goods = res.data.data,
+              len = goods.length;
+          for(let i = 0; i < len; i ++) {
+            let foods = goods[i].foods,
+                length = foods.length;
+            for(let j = 0; j < length; j ++) {
+              foods[j].food = {
+                id: "" + i + j,
+                name: foods[j].name,
+                price: foods[j].price,
+                count: 0
+              }
+            }
+          }
+          this.goods = goods;
           console.log(this.goods)
           Vue.nextTick(() => {
             // dom绑定scroll
@@ -121,7 +137,8 @@ export default {
     }
   },
   components:{
-    shopcar
+    shopcar,
+    cartcontrol
   }
 }
 </script>
@@ -132,7 +149,7 @@ export default {
 #goods
   position absolute
   top 174px
-  bottom 48px 
+  bottom 48px
   left 0
   right 0
   display flex
@@ -142,17 +159,19 @@ export default {
     flex 0 0 80px
     width 80px
     background #f3f5f7
+    overflow: hidden
+    overflow-y: auto
     .menu-item
       padding 0 12px
       font-size 0
       line-height 16px
       &.current
         position relative
-        margin-top -1px 
+        margin-top -1px
         background-color #fff
         &:after
           border-top 1px solid #fff
-        .text 
+        .text
           font-size 12px
           line-height 14px
           font-weight 500
@@ -165,7 +184,7 @@ export default {
         .icon
           display inline-block
           vertical-align top
-          width 14px 
+          width 14px
           height 14px
           background-size 14px 14px
           &.decrease
@@ -177,11 +196,11 @@ export default {
           &.invoice
             bg-image('invoice_3')
           &.guarantee
-            bg-image('guarantee_3')  
+            bg-image('guarantee_3')
         .text
           font-size 12px
           line-height 14px
-          font-weight 200  
+          font-weight 200
 	.foods-wrapper
     flex 1
     background #fff
@@ -226,14 +245,21 @@ export default {
           span
             display inline-block
         .prices
+          position relative
           font-size 20px
           color rgb(240,20,20)
           font-weight 700
+          span
+            display inline-block
+            vertical-align middle
           .old-price
             font-size 10px
-            vertical-align top
             color rgb(147,153,159)
             font-weight 700
             line-height 20px
             text-decoration line-through
+          .cart-control
+            display inline-block
+            position absolute
+            right 0
 </style>

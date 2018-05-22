@@ -1,7 +1,7 @@
 <template>
   <div class="shopcar">
     <div class="content">
-      <div class="chart-icon-wrapper">
+      <div class="chart-icon-wrapper" @click="changeShow()">
         <div class="chart-icon icon-shopping_cart" :class="{noChart: totalCount != 0}"></div>
         <div class="total-count" v-show="totalCount != 0">{{totalCount}}</div>
       </div>
@@ -11,26 +11,52 @@
       </div>
       <div class="deliver-base" :class="{ok: this.totalPrice >= this.minPrice}">{{inform}}</div>
     </div>
+    <div class="car-list-wrapper" v-show="showList">
+      <div class="car-gray"></div>
+      <div class="car-list">
+        <div class="car-list-header">
+          <span class="car-title">购物车</span>
+          <span class="clear">清空</span>
+        </div>
+        <div class="food-item" v-for="food in selectFoods" :key="food.id">
+          <span class="food-title">{{food.name}}</span>
+          <span class="food-price">￥{{food.price}}</span>
+          <cartcontrol class="cart-control" :food="food"></cartcontrol>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import cartcontrol from './cartcontrol'
 
 export default {
   name: 'shopcar',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      fold: true
+    }
+  },
+  methods:{
+    changeShow(){
+      this.fold = !this.fold;
     }
   },
   computed:{
     totalCount(){
       let totalCount = 0;
+      this.selectFoods.forEach((food) => {
+        totalCount += food.count;
+      })
       return totalCount;
     },
     totalPrice(){
       let totalPrice = 0;
+      this.selectFoods.forEach((food) => {
+        totalPrice += food.price * food.count;
+      })
       return totalPrice;
     },
     inform(){
@@ -41,6 +67,13 @@ export default {
       }else{
         return `去结算`;
       }
+    },
+    showList(){
+      if(!this.totalCount){
+        this.fold = true
+        return false
+      }
+      return !this.fold;
     }
   },
   props:{
@@ -49,6 +82,40 @@ export default {
     },
     minPrice:{
       type: Number
+    },
+    selectFoods:{
+      type:Array,
+      default(){
+        return [{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        },{
+          name:'米饭',
+          count:10,
+          price:1.5
+        }];
+      }
     }
   },
   created(){
@@ -59,6 +126,9 @@ export default {
         }
       }
     )
+  },
+  components:{
+    cartcontrol
   }
 }
 </script>
@@ -66,6 +136,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" ref="stylesheet/stylus">
 @import '../assets/stylus/index.styl'
+::-webkit-scrollbar
+  display:none
 .shopcar
   position fixed
   width 100%
@@ -104,7 +176,7 @@ export default {
         color #fff
         width 24px
         height 16px
-        font-size 8px 
+        font-size 8px
         font-weight 700
         line-height 16px
         text-show 0 4px 8px 0 rgba(0,0,0,0.4)
@@ -140,5 +212,60 @@ export default {
       &.ok
         background green
         color #fff
-  
+  .car-list-wrapper
+    position fixed
+    top 0
+    bottom 48px
+    width 100%
+    display flex
+    flex-direction column
+    z-index -1
+    .car-gray
+      flex 1
+      background rgba(7,17,27,0.6)
+    .car-list
+      width 100%
+      position fixed
+      bottom 48px
+      left 0
+      background #fff
+      max-height 217px
+      overflow hidden
+      overflow-y auto
+      .car-list-header
+        height 40px
+        line-height 40px
+        padding 0 18px
+        border-1px(rgba(7,17,27,0.1))
+        background #f3f5f7
+        .car-title
+          font-size 14px
+          font-weight 200
+          color rgb(7,17,27)
+        .clear
+          position absolute
+          right 18px
+          font-size 12px
+          color rgb(0,160,220)
+      .food-item
+        width 100%
+        height 48px
+        line-height 48px
+        margin 0 18px
+        border-1px(rgba(7,17,27,0.1))
+        .food-title
+          font-size 14px
+          color rgb(7,17,27)
+        .food-price
+          position absolute
+          right 120px
+          font-size 10px
+          color rgb(240,20,20)
+        .cart-control
+          position absolute
+          right 34px
+          bottom 0
+          display inline-block
+
+
 </style>
