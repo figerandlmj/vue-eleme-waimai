@@ -86,35 +86,7 @@ export default {
     selectFoods:{
       type:Array,
       default(){
-        return [{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        },{
-          name:'米饭',
-          count:10,
-          price:1.5
-        }];
+        return [];
       }
     }
   },
@@ -158,7 +130,7 @@ export default {
         border-radius 44px
         border 6px solid #141d27
         background #2b333b
-        margin-left 18px
+        margin-left 8px
         margin-top -10px
         font-size 24px
         color rgba(255,255,255,0.4)
@@ -169,7 +141,7 @@ export default {
           color #fff
       .total-count
         position absolute
-        right 0
+        right 10px
         top -6px
         text-align center
         background red
@@ -182,8 +154,9 @@ export default {
         text-show 0 4px 8px 0 rgba(0,0,0,0.4)
         border-radius 16px
     .deliver-fee
-      flex 1
-      padding 12px 0 12px 12px
+      flex 3
+      display flex
+      padding 12px 0 12px 0
       height 24px
       .price
         display inline-block
@@ -198,10 +171,10 @@ export default {
         padding-left 12px
         font-size 12px
         color rgba(255,255,255,0.4)
-        line-height 20px
+        line-height 22px
         font-weight 700
     .deliver-base
-      flex 0 0 105px
+      flex 1
       padding 0 8px
       line-height 48px
       font-size 12px

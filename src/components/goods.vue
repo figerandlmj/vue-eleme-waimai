@@ -1,8 +1,8 @@
 <template>
   <div id="goods">
   	<div class="menu-wrapper" ref="menuWrapper">
-  		<div v-for="(item,index) in goods" :key="index" class="menu-item" :class="{current : currentIndex === index}" @click="selectIndex(index,$event)">
-  			<div class="text-wrapper border-1px">
+  		<div v-for="(item,index) in goods" :key="index" class="menu-item border-1px" :class="{current : currentIndex === index}" @click="selectIndex(index,$event)">
+  			<div class="text-wrapper">
   				<span class="icon" v-show="item.type > 0" :class="classMap[item.type]"></span>
   				<span class="text">{{item.name}}</span>
   			</div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="prices">
                   <span class="price">￥{{item2.price}}</span>
-                  <span v-if="item2.oldPrice" class="old-price" style="margin-left:8px;">￥{{item2.oldPrice}}</span>
+                  <span v-if="item2.oldPrice" class="old-price">￥{{item2.oldPrice}}</span>
                   <cartcontrol class="cart-control" :food="item2.food"></cartcontrol>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default {
     .menu-item
       padding 0 12px
       font-size 0
-      line-height 16px
+      border-1px(rgba(7,17,27,0.1))
       &.current
         position relative
         margin-top -1px
@@ -180,7 +180,6 @@ export default {
         vertical-align middle
         height 54px
         width 56px
-        border-1px(rgba(7,17,27,0.1))
         .icon
           display inline-block
           vertical-align top
@@ -214,7 +213,7 @@ export default {
       border-left 4px solid #d9dde1
     .items-content-wrapper
       display flex
-      margin 18px
+      margin 18px 10px
       padding-bottom 18px
       position relative
       background #fff
