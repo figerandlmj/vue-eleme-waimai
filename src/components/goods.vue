@@ -27,7 +27,7 @@
                 <div class="prices">
                   <span class="price">￥{{item2.price}}</span>
                   <span v-if="item2.oldPrice" class="old-price">￥{{item2.oldPrice}}</span>
-                  <cartcontrol class="cart-control" :food="item2.food"></cartcontrol>
+                  <cartcontrol class="cart-control" :food="item2"></cartcontrol>
                 </div>
               </div>
             </li>
@@ -36,7 +36,7 @@
       </ul>
     </div>
     <!-- 购物车 -->
-    <shopcar :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
+    <shopcar :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
   </div>
 </template>
 
@@ -66,21 +66,7 @@ export default {
   	axios.get('/good/goods').then(
       res => {
         if(res.data.code === 0) {
-          let goods = res.data.data,
-              len = goods.length;
-          for(let i = 0; i < len; i ++) {
-            let foods = goods[i].foods,
-                length = foods.length;
-            for(let j = 0; j < length; j ++) {
-              foods[j].food = {
-                id: "" + i + j,
-                name: foods[j].name,
-                price: foods[j].price,
-                count: 0
-              }
-            }
-          }
-          this.goods = goods;
+          this.goods = res.data.data;
           console.log(this.goods)
           Vue.nextTick(() => {
             // dom绑定scroll
@@ -102,6 +88,19 @@ export default {
         }
       }
       return 0;
+    },
+    selectFoods(){
+      let foods = [];
+      if(this.goods.length !== 0) {
+        this.goods.forEach(good => {
+          good.foods.forEach(food => {
+            if(food.count){
+              foods.push(food);
+            }
+          })
+        })
+      }
+      return foods;
     }
   },
   methods: {

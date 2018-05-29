@@ -1,22 +1,22 @@
 <template>
   <div class="shopcar">
     <div class="content">
-      <div class="chart-icon-wrapper" @click="changeShow()">
+      <div class="chart-icon-wrapper" @click="changeShow">
         <div class="chart-icon icon-shopping_cart" :class="{noChart: totalCount != 0}"></div>
         <div class="total-count" v-show="totalCount != 0">{{totalCount}}</div>
       </div>
       <div class="deliver-fee">
         <div class="price border-1px-right" :class="{noPrice: totalPrice != 0}">￥{{totalPrice}}</div>
-        <div class="delivery-price">另需配送费￥{{deliveryPrice}}元</div>
+        <div class="delivery-price">另需配送费￥{{deliveryPrice}}</div>
       </div>
       <div class="deliver-base" :class="{ok: this.totalPrice >= this.minPrice}">{{inform}}</div>
     </div>
     <div class="car-list-wrapper" v-show="showList">
-      <div class="car-gray"></div>
+      <div class="car-gray" @click="changeShow"></div>
       <div class="car-list">
         <div class="car-list-header">
           <span class="car-title">购物车</span>
-          <span class="clear">清空</span>
+          <span class="clear" @click="clear">清空</span>
         </div>
         <div class="food-item" v-for="food in selectFoods" :key="food.id">
           <span class="food-title">{{food.name}}</span>
@@ -31,6 +31,7 @@
 <script>
 import axios from 'axios'
 import cartcontrol from './cartcontrol'
+import Vue from 'vue'
 
 export default {
   name: 'shopcar',
@@ -42,6 +43,11 @@ export default {
   methods:{
     changeShow(){
       this.fold = !this.fold;
+    },
+    clear(){
+      this.selectFoods.forEach(food => {
+        Vue.set(food, "count");
+      });
     }
   },
   computed:{
@@ -91,13 +97,13 @@ export default {
     }
   },
   created(){
-    axios.get('/good/seller').then(
-      res => {
-        if(res.data.code === 0) {
-          console.log(res.data.data);
-        }
-      }
-    )
+    // axios.get('/good/seller').then(
+    //   res => {
+    //     if(res.data.code === 0) {
+    //       console.log(res.data.data);
+    //     }
+    //   }
+    // )
   },
   components:{
     cartcontrol
@@ -121,7 +127,7 @@ export default {
     display flex
     background #141d27
     .chart-icon-wrapper
-      flex 0 0 80px
+      flex 0 0 70px
       position relative
       .chart-icon
         position relative
@@ -163,19 +169,18 @@ export default {
         line-height 24px
         color rgba(255,255,255,0.2)
         border-1px-right(rgba(255,255,255,0.4))
-        padding-right 12px
+        padding-right 10px
         &.noPrice
           color #fff
       .delivery-price
         display inline-block
-        padding-left 12px
+        padding-left 10px
         font-size 12px
         color rgba(255,255,255,0.4)
         line-height 22px
         font-weight 700
     .deliver-base
-      flex 1
-      padding 0 8px
+      flex 2
       line-height 48px
       font-size 12px
       text-align center
