@@ -1,8 +1,6 @@
 # vue-eleme-waimai
-<br>
 ![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/1.png)
 ![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/2.png)
-<br>
 
 > A Vue.js project
 
