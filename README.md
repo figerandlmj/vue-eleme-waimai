@@ -1,7 +1,7 @@
 # vue-eleme-waimai
 <br>
-https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/1.png
-https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/2.png
+![首页](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/1.png)
+![首页](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/2.png)
 <br>
 
 > A Vue.js project
