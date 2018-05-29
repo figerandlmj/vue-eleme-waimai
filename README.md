@@ -1,4 +1,8 @@
 # vue-eleme-waimai
+<br>
+https://github.com/figerandlmj/react-tao-piaopiao/blob/master/uploadImg/1.png
+https://github.com/figerandlmj/react-tao-piaopiao/blob/master/uploadImg/2.png
+<br>
 
 > A Vue.js project
 
