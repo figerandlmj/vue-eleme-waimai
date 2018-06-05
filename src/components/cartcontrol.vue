@@ -16,6 +16,8 @@ export default{
   },
   methods:{
     remove(event){
+      event.cancelBubble = true;
+      event.stopPropagation();
       // if(event._constructed){
         if(this.food.count === 0){
           return;
@@ -26,6 +28,8 @@ export default{
     },
     // 绑定了一个bsscroll插件
     add(event){
+      event.cancelBubble = true;
+      event.stopPropagation();
       // if(event._constructed){
         if(!this.food.count){
           Vue.set(this.food, "count");
@@ -41,14 +45,13 @@ export default{
 
 <style lang="stylus" scoped>
 .control-wrapper
-  display flex
   color rgb(0,160,220)
   font-size 24px
   span
-    flex 1
     display inline-block
     vertical-align middle
   .count
+    line-height 24px
     font-size 10px
     color rgb(147,153,159)
 </style>

@@ -16,7 +16,7 @@
       <div class="car-list">
         <div class="car-list-header">
           <span class="car-title">购物车</span>
-          <span class="clear" @click="clear">清空</span>
+          <span class="clear" @click="clearAll">清空</span>
         </div>
         <div class="food-item" v-for="food in selectFoods" :key="food.id">
           <span class="food-title">{{food.name}}</span>
@@ -44,9 +44,9 @@ export default {
     changeShow(){
       this.fold = !this.fold;
     },
-    clear(){
+    clearAll(){
       this.selectFoods.forEach(food => {
-        Vue.set(food, "count");
+        food.count = 0;
       });
     }
   },
@@ -118,10 +118,11 @@ export default {
   display:none
 .shopcar
   position fixed
-  width 100%
-  height 48px
   bottom 0
   left 0
+  z-index 20
+  width 100%
+  height 48px
   .content
     width 100%
     display flex

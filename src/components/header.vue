@@ -1,39 +1,43 @@
 <template>
-  <div id="header">
-    <div class="content-wrapper">
-      <div class="avatar">
-        <img :src="seller.avatar" alt="" class="set-img">
+  <div class="header-wrapper">
+    <div id="header">
+      <div class="content-wrapper">
+        <div class="avatar">
+          <img :src="seller.avatar" alt="" class="set-img">
+        </div>
+        <div class="content">
+          <div class="title">
+            <span class="brand"></span>
+            <span class="name">{{seller.name}}</span>
+          </div>
+          <div class="description">
+            {{seller.description}}/{{seller.deliveryTime}}分送达
+          </div>
+          <div v-if="seller.supports" class="supports">
+            <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+            <span>{{seller.supports[0].description}}</span>
+          </div>
+          <div class="num-wrapper" v-if="seller.supports" @click="showMask">
+            <span>{{seller.supports.length}}个</span>
+            <span class="icon-keyboard_arrow_right more"></span>
+          </div>
+        </div>
       </div>
-      <div class="content">
-        <div class="title">
-          <span class="brand"></span>
-          <span class="name">{{seller.name}}</span>
-        </div>
-        <div class="description">
-          {{seller.description}}/{{seller.deliveryTime}}分送达
-        </div>
-        <div v-if="seller.supports" class="supports">
-          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
-          <span>{{seller.supports[0].description}}</span>
-        </div>
-        <div class="num-wrapper" v-if="seller.supports">
-          <span>{{seller.supports.length}}个</span>
-          <span class="icon-keyboard_arrow_right more"></span>
-        </div>
+      <div class="bulletin-wrapper" @click="showMask">
+        <span class="bulletin-icon"></span>
+        <span class="bulletin">{{seller.bulletin}}</span>
+        <span class="icon-keyboard_arrow_right"></span>
+      </div>
+      <div class="background">
+        <img :src="seller.avatar" alt="">
       </div>
     </div>
-    <div class="bulletin-wrapper">
-      <span class="bulletin-icon"></span>
-      <span class="bulletin">{{seller.bulletin}}</span>
-      <span class="icon-keyboard_arrow_right"></span>
-    </div>
-    <div class="background">
-      <img :src="seller.avatar" alt="">
-    </div>
+    <supportsBulletin v-show="mask" :seller="seller" :showMask="showMask"></supportsBulletin>
   </div>
 </template>
 
 <script>
+import supportsBulletin from './supportsBulletin'
 export default {
   name: 'header',
   props: {
@@ -43,11 +47,19 @@ export default {
   },
   data () {
     return {
-      msg: 'header'
+      mask: false
     }
   },
   created() {
     this.classMap = ['decrease','discount','special','invoice','guarantee']
+  },
+  methods:{
+    showMask(){
+      this.mask = !this.mask
+    }
+  },
+  components:{
+    supportsBulletin
   }
 }
 </script>
@@ -65,8 +77,8 @@ export default {
     .avatar
       float left
     img
-      border-radius 2px 
-      set-img(64px) 
+      border-radius 2px
+      set-img(64px)
     .content
       margin-left 64px
       padding-left 16px
@@ -76,7 +88,7 @@ export default {
           display inline-block
           bg-image('brand')
           width 30px
-          height 18px 
+          height 18px
           background-size 30px 18px
           vertical-align top
         .name
@@ -108,7 +120,7 @@ export default {
             bg-image('guarantee_1')
       .num-wrapper
         position absolute
-        right 12px 
+        right 12px
         bottom 14px
         height 12px
         line-height 12px
@@ -143,7 +155,7 @@ export default {
     .icon-keyboard_arrow_right
       position absolute
       right 10px
-      bottom 4px      
+      bottom 4px
   .background
     position absolute
     top 0
@@ -153,5 +165,5 @@ export default {
     filter blur(10px)
     img
       background-size cover
-      width 100%      
+      width 100%
 </style>

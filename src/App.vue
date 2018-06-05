@@ -34,6 +34,7 @@ export default {
       res => {
         if(res.data.code === 0) {
           this.seller = res.data.data;
+          console.log(this.seller);
         }
       }
     )
@@ -58,6 +59,6 @@ export default {
         display block
         font-size 14px
         color rgb(77,85,93)
-      a.active
+      a.router-link-active
         color rgb(240,20,20) !important
 </style>

@@ -13,7 +13,7 @@
         <li v-for="(items,index) in goods" :key="index" class="foods-list-hook">
           <div class="items-title">{{items.name}}</div>
           <ul>
-            <li v-for="(item2,index) in items.foods" :key="index" class="items-content-wrapper">
+            <li v-for="(item2,index) in items.foods" :key="index" @click="goDetail(item2)" class="items-content-wrapper">
               <div class="items-icon">
                 <img :src="item2.icon" alt="">
               </div>
@@ -35,6 +35,7 @@
         </li>
       </ul>
     </div>
+    <foodDetail v-if="showFood" :food="food" :goDetail="goDetail"></foodDetail>
     <!-- 购物车 -->
     <shopcar :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcar>
   </div>
@@ -46,6 +47,7 @@ import Vue from 'vue'
 import BScroll from 'better-scroll'
 import shopcar from './shopcar'
 import cartcontrol from './cartcontrol'
+import foodDetail from './foodDetail'
 
 export default {
   name: 'goods',
@@ -53,7 +55,9 @@ export default {
     return {
       goods: [],
       heightList: [],
-      scrollY: 0
+      scrollY: 0,
+      showFood:false,
+      food:{}
     }
   },
   props:{
@@ -133,11 +137,16 @@ export default {
         height += item.clientHeight;
         this.heightList.push(height);
       }
+    },
+    goDetail(food){
+      this.food = food;
+      this.showFood = !this.showFood;
     }
   },
   components:{
     shopcar,
-    cartcontrol
+    cartcontrol,
+    foodDetail
   }
 }
 </script>
