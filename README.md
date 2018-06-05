@@ -1,6 +1,11 @@
 # vue-eleme-waimai
 ![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/1.png)
 ![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/2.png)
+![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/3.png)
+![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/4.png)
+![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/5.png)
+![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/6.png)
+![pic](https://github.com/figerandlmj/vue-eleme-waimai/blob/master/uploadImg/7.png)
 
 > A Vue.js project
 
